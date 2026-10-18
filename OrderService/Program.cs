@@ -12,7 +12,7 @@ var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
 
-app.MapGraphQL();
+app.MapGraphQL("/graphql/orders");
 
 // Extract into own UseEntityFramework.cs
 using (var scope = app.Services.CreateScope())
