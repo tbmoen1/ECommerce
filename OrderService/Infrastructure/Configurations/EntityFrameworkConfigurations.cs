@@ -12,4 +12,12 @@ public static class EntityFrameworkConfigurations
             options.UseSqlite("Data Source=orders.db");
         }); 
     }
+
+    public static void UseEntityFrameworkConfigurations(this WebApplication app)
+    {
+        using var scope = app.Services.CreateScope();
+        
+        var context = scope.ServiceProvider.GetRequiredService<DomainContext>();
+        context.Database.EnsureCreated();
+    }
 }

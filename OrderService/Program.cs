@@ -13,11 +13,6 @@ var app = builder.Build();
 app.MapGet("/", () => "Hello World!");
 
 app.MapGraphQL("/graphql/orders");
+app.UseEntityFrameworkConfigurations();
 
-// Extract into own UseEntityFramework.cs
-using (var scope = app.Services.CreateScope())
-{
-    var context = scope.ServiceProvider.GetRequiredService<DomainContext>();
-    context.Database.EnsureCreated();
-}
 app.Run();
