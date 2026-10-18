@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="OrderService\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="OrderService\appsettings.json" />
+      <_ContentIncludedByDefault Remove="OrderService\obj\OrderService.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="OrderService\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="OrderService\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="OrderService\Properties\launchSettings.json" />
+    </ItemGroup>
+
+</Project>
