@@ -8,10 +8,12 @@ public class CreateOrderMutation
 {
     public async Task<CreateOrderMutationPayload> CreateOrder(
         CreateOrderMutationInput input,
-        [Service] DomainContext context
-        )
+        [Service] DomainContext context)
     {
-        var order = new Order(long.MaxValue);
+        var order = new Order(
+            long.MaxValue, 
+            input.UnitId,
+            input.Quantity);
         
         context.Orders.Add(order);
         await context.SaveChangesAsync();

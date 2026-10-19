@@ -1,6 +1,7 @@
 ﻿namespace OrderService.Application.Features.Orders.Mutations.CreateOrder;
 
-public class CreateOrderMutationInput
+public class CreateOrderMutationInput(long unitId, int quantity)
 {
-    public string OrderId { get; set; } // Not used yet
+    public long UnitId { get; set; } = unitId;
+    public int Quantity { get; set; } =  quantity;
 }   
