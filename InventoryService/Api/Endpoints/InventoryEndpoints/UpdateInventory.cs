@@ -1,4 +1,5 @@
-﻿using InventoryService.Domain.Entities;
+﻿using InventoryService.Application.Interfaces;
+using InventoryService.Domain.Entities;
 using InventoryService.Infrastructure.Contexts;
 using InventoryService.Models.Endpoints.InventoryEndpoints;
 using Microsoft.AspNetCore.Mvc;
@@ -15,34 +16,16 @@ public static class UpdateInventoryEndpoints
 
     [EndpointDescription("Updates the Unit. New data will override existing, if sent")]
     public static async Task<ActionResult<Unit>> UpdateUnit(
-        InventoryContext context,
-        long unitId,
-        [FromBody] UpdateInventoryUnitDto unitDto)
+            InventoryContext context,
+            long unitId,
+            [FromBody] UpdateInventoryUnitDto unitDto,
+            [FromServices] IInventoryService inventoryService)
     {
         var unitToUpdate = await context.Units.FirstOrDefaultAsync(u => u.Id == unitId);
         if (unitToUpdate == null)
             return new NotFoundResult();
         
-        // Extract to its own service, UnitService fx
-        if (unitDto.Name != null)
-        {
-            unitToUpdate.Name = unitDto.Name;
-        } 
-        else if (unitDto.Description != null)
-        {
-            unitToUpdate.Description = unitDto.Description;
-        }
-        else if (unitDto.Value != null)
-        {
-            var currencyToUpdate =
-                await context 
-                    .Currencies.FirstOrDefaultAsync(c => c.Code == unitDto.Value.CurrencyCode);
-            if (currencyToUpdate == null)
-                return new NotFoundResult();
-            
-            unitToUpdate.SetValue(currencyToUpdate.Code, unitDto.Value.Value);
-        }
-
+        await inventoryService.UpdateUnit(unitDto, unitToUpdate);
         await context.SaveChangesAsync();
         return unitToUpdate;
     }
