@@ -1,5 +1,6 @@
 ﻿using InventoryService.Application.Interfaces;
 using InventoryService.Domain.Entities;
+using InventoryService.Domain.Exceptions;
 using InventoryService.Infrastructure.Contexts;
 using InventoryService.Models.Endpoints.InventoryEndpoints;
 using Microsoft.EntityFrameworkCore;
@@ -31,5 +32,20 @@ public class InventoryService(InventoryContext context) : IInventoryService
         }
 
         return unitToUpdate;
+    }
+
+    public async Task<Unit> TryReserveAmountOfUnitsAsync(Unit unitToReserve, int quantity)
+    {
+        try
+        {
+            unitToReserve.TryReserve(quantity);
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+
+            throw new UnitConcurrencyException("Another request as changed the same row. Please try again");
+        }        
+        return unitToReserve;
     }
 }

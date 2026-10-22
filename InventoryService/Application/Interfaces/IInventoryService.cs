@@ -6,4 +6,5 @@ namespace InventoryService.Application.Interfaces;
 public interface IInventoryService
 {
     public Task<Unit> UpdateUnit(UpdateInventoryUnitDto unitDto, Unit unitToUpdate);
+    public Task<Unit> TryReserveAmountOfUnitsAsync(Unit unit, int quantity);
 }

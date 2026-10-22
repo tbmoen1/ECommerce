@@ -1,4 +1,5 @@
 ﻿using InventoryService.Infrastructure.Contexts;
+using InventoryService.Infrastructure.Data.Interceptors;
 using Microsoft.EntityFrameworkCore;
 
 namespace InventoryService.Infrastructure.Configurations;
@@ -10,6 +11,8 @@ public static class EntityFrameworkConfigurations
         services.AddPooledDbContextFactory<InventoryContext>(options =>
         {
             options.UseSqlite("Data Source=inventory.db");
+            options.AddInterceptors(new ConcurrencyInterceptor());
+            options.EnableSensitiveDataLogging();
         }); 
     }
 
