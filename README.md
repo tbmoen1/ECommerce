@@ -12,6 +12,7 @@ All code is written by hand
 - In general
   - .Net 10
   - Entity Framework ORM w/ SQLite
+    - Snowflake IdGeneration
 - OrderService
   - Customer facing HotChocolate GraphQL API
   - Integrates with InventoryService
