@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.IdGeneration", "BuildingBlocks\ECommerce.IdGeneration\ECommerce.IdGeneration.csproj", "{58F592E0-8BEC-46A5-8441-679C5ABD5DD4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentService", "PaymentService\PaymentService.csproj", "{B93738B0-A59B-43A9-8027-4A08F4080AF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,18 @@ Global
 		{58F592E0-8BEC-46A5-8441-679C5ABD5DD4}.Release|x64.Build.0 = Release|Any CPU
 		{58F592E0-8BEC-46A5-8441-679C5ABD5DD4}.Release|x86.ActiveCfg = Release|Any CPU
 		{58F592E0-8BEC-46A5-8441-679C5ABD5DD4}.Release|x86.Build.0 = Release|Any CPU
+		{B93738B0-A59B-43A9-8027-4A08F4080AF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B93738B0-A59B-43A9-8027-4A08F4080AF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B93738B0-A59B-43A9-8027-4A08F4080AF1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B93738B0-A59B-43A9-8027-4A08F4080AF1}.Debug|x64.Build.0 = Debug|Any CPU
+		{B93738B0-A59B-43A9-8027-4A08F4080AF1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B93738B0-A59B-43A9-8027-4A08F4080AF1}.Debug|x86.Build.0 = Debug|Any CPU
+		{B93738B0-A59B-43A9-8027-4A08F4080AF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B93738B0-A59B-43A9-8027-4A08F4080AF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B93738B0-A59B-43A9-8027-4A08F4080AF1}.Release|x64.ActiveCfg = Release|Any CPU
+		{B93738B0-A59B-43A9-8027-4A08F4080AF1}.Release|x64.Build.0 = Release|Any CPU
+		{B93738B0-A59B-43A9-8027-4A08F4080AF1}.Release|x86.ActiveCfg = Release|Any CPU
+		{B93738B0-A59B-43A9-8027-4A08F4080AF1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,5 +78,6 @@ Global
 		{8F058C39-3DBA-48A4-85F0-FAB17B0F4142} = {27326C0C-E7F0-462C-B8BC-CF3F45B32619}
 		{87228DF4-90FA-4489-8EA3-19B5CCB2C175} = {27326C0C-E7F0-462C-B8BC-CF3F45B32619}
 		{58F592E0-8BEC-46A5-8441-679C5ABD5DD4} = {7266C4A9-E384-DC00-0EB6-47F6002CFBA7}
+		{B93738B0-A59B-43A9-8027-4A08F4080AF1} = {27326C0C-E7F0-462C-B8BC-CF3F45B32619}
 	EndGlobalSection
 EndGlobal
