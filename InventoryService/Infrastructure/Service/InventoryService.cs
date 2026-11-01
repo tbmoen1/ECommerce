@@ -14,21 +14,16 @@ public class InventoryService(InventoryContext context) : IInventoryService
         if (unitDto.Name != null)
         {
             unitToUpdate.Name = unitDto.Name;
-        } 
-        else if (unitDto.Description != null)
+        }
+
+        if (unitDto.Description != null)
         {
             unitToUpdate.Description = unitDto.Description;
         }
-        else if (unitDto.Value != null)
+
+        if (unitDto.Value != null)
         {
-            var currencyToUpdate =
-                await context 
-                    .Currencies.FirstOrDefaultAsync(c => c.Code == unitDto.Value.CurrencyCode);
-            
-            if (currencyToUpdate == null)
-                throw new Exception($"Currency code {unitDto.Value.CurrencyCode} not found");
-            
-            unitToUpdate.SetValue(currencyToUpdate.Code, unitDto.Value.Value);
+            await UpdateUnitCurrency(unitDto.Value, unitToUpdate);
         }
 
         return unitToUpdate;
@@ -47,5 +42,17 @@ public class InventoryService(InventoryContext context) : IInventoryService
             throw new UnitConcurrencyException("Another request as changed the same row. Please try again");
         }        
         return unitToReserve;
+    }
+
+    public async Task UpdateUnitCurrency(UpdateUnitValueDto updateUnitValueDto, Unit unitToUpdate)
+    {
+        var currencyToUpdate =
+            await context 
+                .Currencies.FirstOrDefaultAsync(c => c.Code == updateUnitValueDto.CurrencyCode);
+        
+        if (currencyToUpdate == null)
+            throw new Exception($"Currency code {updateUnitValueDto.CurrencyCode} not found");
+        
+        unitToUpdate.SetValue(currencyToUpdate.Code, updateUnitValueDto.Value);
     }
 }

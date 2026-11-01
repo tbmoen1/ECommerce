@@ -1,4 +1,5 @@
-﻿using OrderService.Application.Interfaces;
+﻿using ECommerce.IdGeneration;
+using OrderService.Application.Interfaces;
 using OrderService.Domain.Entities;
 using OrderService.Infrastructure.Contexts;
 
@@ -10,10 +11,11 @@ public class CreateOrderMutation
     public async Task<CreateOrderMutationPayload> CreateOrder(
         CreateOrderMutationInput input,
         [Service] IInventoryRepository inventoryService,
-        [Service] DomainContext context)
+        [Service] DomainContext context,
+        [Service] IIdGenerator idGenerator)
     {
         var order = new Order(
-            long.MaxValue, 
+            idGenerator.NextId(), 
             input.UnitId,
             input.Quantity);
         

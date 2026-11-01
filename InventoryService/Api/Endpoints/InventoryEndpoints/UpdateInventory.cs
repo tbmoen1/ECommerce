@@ -1,4 +1,5 @@
-﻿using InventoryService.Application.Interfaces;
+﻿using ECommerce.IdGeneration;
+using InventoryService.Application.Interfaces;
 using InventoryService.Domain.Entities;
 using InventoryService.Domain.Exceptions;
 using InventoryService.Infrastructure.Contexts;
@@ -15,6 +16,8 @@ public static class UpdateInventoryEndpoints
         group.MapPost("Units/{unitId:long}/Update", UpdateUnit)
             .Produces<Unit>();
         group.MapPost("Units/{unitId:long}/Reserve/{quantity:int}", ReserveAmountOfUnits)
+            .Produces<Unit>();
+        group.MapPost("Units/Create", CreateUnit)
             .Produces<Unit>();
     }
 
@@ -58,5 +61,23 @@ public static class UpdateInventoryEndpoints
             return Results.Conflict(e.Message);
         }
         return TypedResults.Ok(unitToReserve);
+    }
+
+    public static async Task<IResult> CreateUnit(
+        [FromServices] InventoryContext context,
+        [FromServices] IIdGenerator idGenerator,
+        [FromServices] IInventoryService inventoryService,
+        [FromBody] CreateUnitDto dto)
+    {
+        var unitToAdd = new Unit(idGenerator.NextId(), dto.Name, dto.Description, dto.Quantity);
+        await context.Units.AddAsync(unitToAdd);
+        await context.SaveChangesAsync();
+        
+        if (dto.UnitValue != null)
+        {
+            await inventoryService.UpdateUnitCurrency(dto.UnitValue, unitToAdd);
+        }
+        
+        return TypedResults.Ok(unitToAdd);
     }
 }

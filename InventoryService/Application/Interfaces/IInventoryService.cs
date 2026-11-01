@@ -7,4 +7,5 @@ public interface IInventoryService
 {
     public Task<Unit> UpdateUnit(UpdateInventoryUnitDto unitDto, Unit unitToUpdate);
     public Task<Unit> TryReserveAmountOfUnitsAsync(Unit unit, int quantity);
+    public Task UpdateUnitCurrency(UpdateUnitValueDto updateUnitValueDto, Unit unitToUpdate);
 }
