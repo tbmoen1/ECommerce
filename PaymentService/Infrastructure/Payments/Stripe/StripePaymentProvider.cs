@@ -6,17 +6,19 @@ namespace PaymentService.Infrastructure.Payments.Stripe;
 
 public class StripePaymentProvider(IHttpClientFactory clientFactory) : IPaymentProvider
 {
-    public async Task<PaymentIntentDto?> CreatePaymentIntentAsync(CreatePaymentIntentDto dto)
+    public async Task<CheckoutSessionDto?> CreateCheckoutSessionAsync(CreateCheckoutSessionDto dto)
     {
         var client = clientFactory.CreateClient(nameof(StripeHttpClient));
         using var content = new FormUrlEncodedContent(new Dictionary<string, string>
         {
-            ["amount"] = dto.Amount.ToString(),
-            ["currency"] = dto.Currency,
+            ["line_items[0][price]"] = dto.PriceId,
+            ["line_items[0][quantity]"] = dto.Quantity.ToString(),
+            ["ui_mode"] = "elements",
+            ["return_url"] = "http://localhost",
+            ["mode"] = "payment"
         });
-        
-        var request = await client.PostAsync("v1/payment_intents", content);  
+        var request = await client.PostAsync("v1/checkout/sessions", content);
         request.EnsureSuccessStatusCode();
-        return await request.Content.ReadFromJsonAsync<PaymentIntentDto>();
+        return await request.Content.ReadFromJsonAsync<CheckoutSessionDto>();
     }
 }

@@ -5,5 +5,5 @@ namespace PaymentService.Application;
 // Abstraction layer to support several payment providers later
 public interface IPaymentProvider
 {
-    public Task<PaymentIntentDto?> CreatePaymentIntentAsync(CreatePaymentIntentDto dto);
+    public Task<CheckoutSessionDto?> CreateCheckoutSessionAsync(CreateCheckoutSessionDto dto);
 }
