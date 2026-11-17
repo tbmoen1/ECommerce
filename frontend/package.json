@@ -1,0 +1,42 @@
+{
+	"name": "intility-app",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"start": "vite",
+		"dev": "vite",
+		"build": "biome format --write && tsc -b && vite build",
+		"lint": "biome format --write",
+		"preview": "vite preview",
+		"test": "vitest"
+	},
+	"dependencies": {
+		"@azure/msal-browser": "^5.27.0",
+		"@azure/msal-react": "^5.7.4",
+		"@intility/bifrost-react": "^6.19.2",
+		"@sentry/react": "^10.69.0",
+		"@stripe/react-stripe-js": "^7.1.0",
+		"@stripe/stripe-js": "^10.3.0",
+		"react": "^19.3.1",
+		"react-dom": "^19.3.1",
+		"react-router": "^8.3.0",
+		"use-local-storage-state": "^20.0.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.6.4",
+		"@intility/vite-plugin-msal": "^0.4.0",
+		"@testing-library/dom": "^10.4.2",
+		"@testing-library/jest-dom": "^7.0.1",
+		"@testing-library/react": "^16.3.2",
+		"@types/react": "^19.3.0",
+		"@types/react-dom": "^19.3.0",
+		"@vitejs/plugin-react": "6.2.0",
+		"happy-dom": "^21.0.4",
+		"oxc-transform-react": "^0.156.0",
+		"typescript": "~6.0.3",
+		"vite": "^8.2.0",
+		"vite-plugin-checker": "^0.14.5",
+		"vitest": "^4.1.10"
+	}
+}
